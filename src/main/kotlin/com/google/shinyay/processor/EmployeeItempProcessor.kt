@@ -8,7 +8,7 @@ class EmployeeItempProcessor: ItemProcessor<Employee, Employee> {
     override fun process(employee: Employee): Employee? {
         val upperCasedEmployee = Employee(employee.firstName.toUpperCase(),
         employee.lastName.toUpperCase())
-        logger.info("Uppercased [$employee] to [$upperCasedEmployee]")
+        logger.info("Upper cased [$employee] to [$upperCasedEmployee]")
         return upperCasedEmployee
     }
 }
