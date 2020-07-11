@@ -2,6 +2,7 @@ package com.google.shinyay.configuration
 
 import com.google.shinyay.entity.Employee
 import com.google.shinyay.processor.EmployeeItempProcessor
+import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider
@@ -17,11 +18,11 @@ import javax.sql.DataSource
 
 
 @Configuration
-class BatchConfiguration(jobBuilderFactory: JobBuilderFactory,
-                         stepBuilderFactory: StepBuilderFactory) {
+class BatchConfiguration(val jobBuilderFactory: JobBuilderFactory,
+                         val stepBuilderFactory: StepBuilderFactory) {
 
     @Bean
-    fun reader(): FlatFileItemReader<Employee>? = FlatFileItemReaderBuilder<Employee>()
+    fun reader(): FlatFileItemReader<Employee> = FlatFileItemReaderBuilder<Employee>()
                 .name("employeeItemReader")
                 .resource(ClassPathResource("employee-data.csv"))
                 .delimited()
@@ -34,14 +35,24 @@ class BatchConfiguration(jobBuilderFactory: JobBuilderFactory,
                 .build()
 
     @Bean
-    fun processor(): EmployeeItempProcessor? = EmployeeItempProcessor()
+    fun processor(): EmployeeItempProcessor = EmployeeItempProcessor()
 
     @Bean
-    fun writer(dataSource: DataSource): JdbcBatchItemWriter<Employee>? {
+    fun writer(dataSource: DataSource): JdbcBatchItemWriter<Employee> {
         return JdbcBatchItemWriterBuilder<Employee>()
                 .itemSqlParameterSourceProvider(BeanPropertyItemSqlParameterSourceProvider<Employee>())
                 .sql("INSERT INTO employee (first_name, last_name) VALUES (:firstName, :lastName)")
                 .dataSource(dataSource)
+                .build()
+    }
+
+    @Bean
+    fun step1(writer: JdbcBatchItemWriter<Employee?>): Step {
+        return stepBuilderFactory.get("step1")
+                .chunk<Employee, Employee>(10)
+                .reader(reader())
+                .processor(processor())
+                .writer(writer)
                 .build()
     }
 }
