@@ -1,6 +1,7 @@
 package com.google.shinyay.configuration
 
 import com.google.shinyay.entity.Employee
+import com.google.shinyay.processor.EmployeeItempProcessor
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
 import org.springframework.batch.item.file.FlatFileItemReader
@@ -27,4 +28,7 @@ class BatchConfiguration(jobBuilderFactory: JobBuilderFactory,
                     }
                 })
                 .build()
+
+    @Bean
+    fun processor(): EmployeeItempProcessor? = EmployeeItempProcessor()
 }
