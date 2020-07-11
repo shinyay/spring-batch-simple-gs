@@ -47,12 +47,10 @@ class BatchConfiguration(val jobBuilderFactory: JobBuilderFactory,
     }
 
     @Bean
-    fun step1(writer: JdbcBatchItemWriter<Employee?>): Step {
-        return stepBuilderFactory.get("step1")
+    fun step1(writer: JdbcBatchItemWriter<Employee?>): Step = stepBuilderFactory.get("step1")
                 .chunk<Employee, Employee>(10)
                 .reader(reader())
                 .processor(processor())
                 .writer(writer)
                 .build()
-    }
 }
