@@ -1,10 +1,13 @@
 package com.google.shinyay.configuration
 
 import com.google.shinyay.entity.Employee
+import com.google.shinyay.listener.JobNotificationListener
 import com.google.shinyay.processor.EmployeeItempProcessor
+import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
+import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider
 import org.springframework.batch.item.database.JdbcBatchItemWriter
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder
@@ -53,4 +56,14 @@ class BatchConfiguration(val jobBuilderFactory: JobBuilderFactory,
                 .processor(processor())
                 .writer(writer)
                 .build()
+
+    @Bean
+    fun importUserJob(listener: JobNotificationListener, step1: Step): Job {
+        return jobBuilderFactory["importUserJob"]
+                .incrementer(RunIdIncrementer())
+                .listener(listener)
+                .flow(step1)
+                .end()
+                .build()
+    }
 }
