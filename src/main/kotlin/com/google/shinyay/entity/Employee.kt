@@ -1,4 +1,4 @@
 package com.google.shinyay.entity
 
-data class Employee(val firstName: String,
-                    val lastName: String)
+data class Employee(var firstName: String = "",
+                    var lastName: String = "")
