@@ -7,16 +7,24 @@ import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
+import org.springframework.batch.core.launch.JobLauncher
 import org.springframework.batch.core.launch.support.RunIdIncrementer
+import org.springframework.batch.core.launch.support.SimpleJobLauncher
+import org.springframework.batch.core.repository.JobRepository
+import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider
 import org.springframework.batch.item.database.JdbcBatchItemWriter
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder
 import org.springframework.batch.item.file.FlatFileItemReader
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper
+import org.springframework.batch.support.DatabaseType
+import org.springframework.batch.support.transaction.ResourcelessTransactionManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import javax.sql.DataSource
 
 
@@ -66,4 +74,22 @@ class BatchConfiguration(val jobBuilderFactory: JobBuilderFactory,
                 .end()
                 .build()
     }
+
+//    @Bean
+//    fun repository(): JobRepository {
+//        val factory: JobRepositoryFactoryBean =
+//                JobRepositoryFactoryBean().apply {
+//                    setDatabaseType(DatabaseType.H2.productName)
+//                    setDataSource(EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build())
+//
+//                    transactionManager = ResourcelessTransactionManager()
+//        }
+//        return factory.`object`
+//    }
+//
+//    @Bean
+//    fun launcher(repository: JobRepository): JobLauncher =
+//            SimpleJobLauncher().apply {
+//                setJobRepository(repository)
+//            }
 }
