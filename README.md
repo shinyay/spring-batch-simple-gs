@@ -36,11 +36,19 @@ class EmployeeItempProcessor: ItemProcessor<Employee, Employee>
 ```
 
 ### ItemReader
-Created ItemReader Bean by FlatFileItemReaderBuilder
+Create ItemReader Bean by FlatFileItemReaderBuilder
 
 ```kotlin
 @Bean
 fun reader(): FlatFileItemReader<Employee> = FlatFileItemReaderBuilder<Employee>()
+```
+
+### ItemWriter
+Create ItemWriter Bean by JdbcBatchItemWriter
+
+```kotlin
+@Bean
+fun writer(dataSource: DataSource): JdbcBatchItemWriter<Employee>()
 ```
 
 ## Features
