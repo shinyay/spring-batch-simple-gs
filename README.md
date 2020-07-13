@@ -3,6 +3,10 @@
 This project shows the process of creating a basic batch solution.
 
 ## Description
+### Dependency
+- spring-boot-starter-batch
+- h2database
+
 
 ## Demo
 
