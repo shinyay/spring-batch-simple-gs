@@ -29,11 +29,18 @@ This project shows the process of creating a basic batch solution.
 
 ## Demo
 ### ItemProcessor
-
 Processor Class implements `ItemProcessor` interface
 
 ```kotlin
 class EmployeeItempProcessor: ItemProcessor<Employee, Employee>
+```
+
+### ItemReader
+Created ItemReader Bean by FlatFileItemReaderBuilder
+
+```kotlin
+@Bean
+fun reader(): FlatFileItemReader<Employee> = FlatFileItemReaderBuilder<Employee>()
 ```
 
 ## Features
