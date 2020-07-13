@@ -66,7 +66,7 @@ class BatchConfiguration(val jobBuilderFactory: JobBuilderFactory,
                 .build()
 
     @Bean
-    fun importUserJob(listener: JobNotificationListener, step1: Step): Job {
+    fun job1(listener: JobNotificationListener, step1: Step): Job {
         return jobBuilderFactory["importUserJob"]
                 .incrementer(RunIdIncrementer())
                 .listener(listener)
