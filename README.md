@@ -1,6 +1,6 @@
-# Name
+# Spring Batch Simple Getting Started
 
-Overview
+This project shows the process of creating a basic batch solution.
 
 ## Description
 
