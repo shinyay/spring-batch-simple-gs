@@ -59,9 +59,12 @@ fun step1(writer: JdbcBatchItemWriter<Employee?>): Step = stepBuilderFactory.get
             .chunk<Employee, Employee>(10)
             .reader(reader())
             .processor(processor())
-            .writer(writer)
+            .writer(writer)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
             .build()
 ```
+
+### Job
+Job definition needs an incrementer, because jobs use a database to maintain execution state.
 ## Features
 
 - feature:1
