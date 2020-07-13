@@ -28,6 +28,13 @@ This project shows the process of creating a basic batch solution.
   - It is an abstraction that represents the business processing of an item
 
 ## Demo
+### ItemProcessor
+
+Processor Class implements `ItemProcessor` interface
+
+```kotlin
+class EmployeeItempProcessor: ItemProcessor<Employee, Employee>
+```
 
 ## Features
 
