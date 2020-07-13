@@ -7,6 +7,8 @@ This project shows the process of creating a basic batch solution.
 - spring-boot-starter-batch
 - h2database
 
+### Spring Batch Model
+![spring-batch-model](images/spring-batch.png)
 
 ## Demo
 
