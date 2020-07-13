@@ -51,6 +51,17 @@ Create ItemWriter Bean by JdbcBatchItemWriter
 fun writer(dataSource: DataSource): JdbcBatchItemWriter<Employee>()
 ```
 
+### Step
+Step involves `Reader`, `Processor` and `Writer`.
+```kotlin
+@Bean
+fun step1(writer: JdbcBatchItemWriter<Employee?>): Step = stepBuilderFactory.get("step1")
+            .chunk<Employee, Employee>(10)
+            .reader(reader())
+            .processor(processor())
+            .writer(writer)
+            .build()
+```
 ## Features
 
 - feature:1
