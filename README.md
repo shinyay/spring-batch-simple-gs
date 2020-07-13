@@ -10,6 +10,23 @@ This project shows the process of creating a basic batch solution.
 ### Spring Batch Model
 ![spring-batch-model](images/spring-batch.png)
 
+- Job
+  - It is an entity that encapsulates an entire batch process
+  - It is simply a container for Step instances
+  - It combines multiple steps that belong logically together in a flow and allows for configuration of properties global to all steps
+- Step
+  - It  is a domain object that encapsulates an independent, sequential phase of a batch job
+- JobRepository
+  - It is the persistence mechanism for all the `Jobs` and `Steps`
+- JobLauncher
+  - It represents a simple interface for launching a `Job`
+- Item Reader
+  - It is an abstraction that represents the retrieval of input for a `Step`
+- Item Writer
+  - It is an abstraction that represents the output of a `Step`
+- Item Processor
+  - It is an abstraction that represents the business processing of an item
+
 ## Demo
 
 ## Features
